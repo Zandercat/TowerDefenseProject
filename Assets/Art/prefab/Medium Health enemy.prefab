@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1961198011}
   - component: {fileID: 1961198010}
   - component: {fileID: 1961198009}
-  - component: {fileID: -152701522378930727}
+  - component: {fileID: 2759576389941784054}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Medium Health enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.53333336, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.8490566, g: 0.42052332, b: 0.31764707, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1961198011}
-  moveSpeed: 2
---- !u!114 &-152701522378930727
+  moveSpeed: 1.2
+--- !u!114 &2759576389941784054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,3 +151,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6503b7117a83145aa9f8b8037782df03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoints: 5

@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
 public class enermySpawner : MonoBehaviour
 {
@@ -60,7 +60,8 @@ public class enermySpawner : MonoBehaviour
     }
     private void SpawnEnemy()
     {
-        GameObject prefabToSpawn = enemyPrefabs[0];
+        int index = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+        GameObject prefabToSpawn = enemyPrefabs[index];
         Instantiate(prefabToSpawn, Levelmanager.main.startPoint.position, Quaternion.identity);
     }
     private void StartWave()
