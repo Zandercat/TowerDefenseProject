@@ -42,4 +42,14 @@ public class enemyMovement : MonoBehaviour
 
         rb.velocity = direction * moveSpeed;
     }
+
+    public int getPathIndex()
+    {
+        return pathIndex;
+    }
+
+    public Transform getTarget()
+    {
+        return target;
+    }
 }
