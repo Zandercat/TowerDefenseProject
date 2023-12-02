@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DPSScript : MonoBehaviour
+public class SupportScript : MonoBehaviour
 {
     public int damage; //damage per shot
     public int fireDelay; //fixedUpdate frames before next shot
     public float range;
+    public int slowDuration;
+    public float slowIntensity;
     int curDelay;
 
     // Start is called before the first frame update
@@ -38,6 +40,8 @@ public class DPSScript : MonoBehaviour
         int numObjects = Physics2D.OverlapCircle(transform.position, range, new ContactFilter2D().NoFilter(), results);
         Debug.Log("Found " + numObjects + " objects in range.");
         List<enemyMovement> enemies = new List<enemyMovement>();
+        List<enemyMovement> slowEnemies = new List<enemyMovement>();
+
         int greatestIndex = 0;
         foreach (Collider2D result in results)
         {
@@ -46,23 +50,22 @@ public class DPSScript : MonoBehaviour
                 enemyMovement enemy = result.gameObject.GetComponent<enemyMovement>();
                 if (enemy != null)
                 {
-                    int curIndex = enemy.getPathIndex();
-                    Debug.Log("Enemy sighted: " + enemy.name + " at path index " + curIndex);
-                    if (curIndex > greatestIndex)
+                    if (enemy.slowDuration > 0)
                     {
-                        Debug.Log("New highest path index found: " + curIndex +
-                            ". Clearing " + enemies.Count + " enemies with index " + greatestIndex + ".");
-                        enemies = new List<enemyMovement>();
-                        enemies.Add(enemy);
-                        greatestIndex = curIndex;
+                        slowEnemies.Add(enemy);
                     }
-                    else if (curIndex == greatestIndex)
+                    else
                     {
                         enemies.Add(enemy);
                     }
-                    //if it's lesser, it's not the target, don't bother with it, do nothing
                 }
             }
+        }
+
+        if (enemies.Count == 0)
+        {
+            enemies = slowEnemies; //only target a slow enemy if all enemies are slowed
+            Debug.Log("No fast enemies. Targeting slow enemies.");
         }
 
         if (enemies.Count == 0)
@@ -71,8 +74,36 @@ public class DPSScript : MonoBehaviour
             return; //Nothing to fire at
         }
 
+        /*          */
+
+
         //Going ahead with firing, set delay
         curDelay = 0;
+        Debug.Log(enemies.Count + " enemies of slowest available speed in range.");
+
+        List<enemyMovement> frontEnemies = new List<enemyMovement>();
+        greatestIndex = 0;
+        foreach (enemyMovement enemy in enemies)
+        {
+            int curIndex = enemy.getPathIndex();
+            Debug.Log("Enemy sighted: " + enemy.name + " at path index " + curIndex);
+            if (curIndex > greatestIndex)
+            {
+                Debug.Log("New highest path index found: " + curIndex +
+                    ". Clearing " + frontEnemies.Count + " enemies with index " + greatestIndex + ".");
+                frontEnemies = new List<enemyMovement>();
+                frontEnemies.Add(enemy);
+                greatestIndex = curIndex;
+            }
+            else if (curIndex == greatestIndex)
+            {
+                frontEnemies.Add(enemy);
+            }
+            //if it's lesser, it's not the target, don't bother with it, do nothing
+        }
+
+        enemies = frontEnemies; //just sub that in so the later code doesn't need changing
+
         Debug.Log(enemies.Count + " enemies with highest path index (" + greatestIndex + " in range.");
 
         float leastDistance = Mathf.Infinity;
@@ -98,10 +129,12 @@ public class DPSScript : MonoBehaviour
     {
         Debug.Log("Firing at " + target.gameObject.name);
 
-        DrawLine(transform.position, target.transform.position, Color.red);
+        DrawLine(transform.position, target.transform.position, Color.blue);
 
         target.gameObject.GetComponent<Health>().TakeDamage(damage, 0);
         //hardcoded damage type since every tower type needs its own fire function anyways
+
+        target.Slow(slowDuration, slowIntensity);
     }
 
     void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)

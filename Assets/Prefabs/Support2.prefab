@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 6856836988086428769}
   - component: {fileID: 6856836988086428775}
   - component: {fileID: 6856836988086428774}
+  - component: {fileID: -5159476011032700022}
   m_Layer: 0
   m_Name: Support2
   m_TagString: Tower
@@ -325,6 +326,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073e066ab1d914da3a7f41eedf0d2b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5159476011032700022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856836988086428771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387af064984374e47a0d7f8cd6814b59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
+  fireDelay: 25
+  range: 3.5
+  slowDuration: 45
+  slowIntensity: 0.4
 --- !u!1 &7596517554836491689
 GameObject:
   m_ObjectHideFlags: 0

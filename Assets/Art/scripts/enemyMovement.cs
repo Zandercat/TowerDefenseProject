@@ -13,9 +13,14 @@ public class enemyMovement : MonoBehaviour
     private Transform target;
     private int pathIndex = 0;
 
+    public int slowDuration { get; set; }
+    private float slowIntensity;
+    private bool isBurned;
+
     private void Start()
     {
         target = Levelmanager.main.path[pathIndex];
+        slowDuration = 0;
     }
 
     private void Update()
@@ -40,6 +45,19 @@ public class enemyMovement : MonoBehaviour
     {
         Vector2 direction = (target.position - transform.position).normalized;
 
+        if (slowDuration > 0)
+        {
+            slowDuration--;
+            direction *= slowIntensity;
+            if (isBurned) {
+                GetComponent<Health>().TakeDamage(1, 2);
+            }
+        }
+        else
+        {
+            isBurned = false;
+        }
+
         rb.velocity = direction * moveSpeed;
     }
 
@@ -51,5 +69,11 @@ public class enemyMovement : MonoBehaviour
     public Transform getTarget()
     {
         return target;
+    }
+
+    public void Slow(int slowDur, float slowIntens)
+    {
+        if (slowDur > slowDuration) slowDuration = slowDur;
+        if (slowIntens > slowIntensity) slowIntensity = slowIntens;
     }
 }

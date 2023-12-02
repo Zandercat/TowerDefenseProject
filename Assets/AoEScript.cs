@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DPSScript : MonoBehaviour
+public class AoEScript : MonoBehaviour
 {
     public int damage; //damage per shot
     public int fireDelay; //fixedUpdate frames before next shot
     public float range;
+    public float explosionRadius;
+    public GameObject AoEGraphic;
     int curDelay;
 
     // Start is called before the first frame update
@@ -98,10 +100,24 @@ public class DPSScript : MonoBehaviour
     {
         Debug.Log("Firing at " + target.gameObject.name);
 
-        DrawLine(transform.position, target.transform.position, Color.red);
+        DrawLine(transform.position, target.transform.position, new Color(1, 0.6f, 0.2f)); //random orange, probably not a good orange
 
-        target.gameObject.GetComponent<Health>().TakeDamage(damage, 0);
-        //hardcoded damage type since every tower type needs its own fire function anyways
+        GameObject graphic = Instantiate(AoEGraphic, target.transform.position, Quaternion.identity);
+        graphic.transform.localScale *= explosionRadius;
+        Destroy(graphic, 0.2f);
+
+        Collider2D[] hits = new Collider2D[100];
+        Physics2D.OverlapCircle(target.transform.position, explosionRadius, new ContactFilter2D().NoFilter(), hits);
+
+        foreach (Collider2D hit in hits)
+        {
+            enemyMovement enemy = hit.GetComponent<enemyMovement>();
+            if (enemy != null)
+            {
+                float damageMultiplier = (explosionRadius - Vector3.Distance(enemy.transform.position, target.transform.position)) / explosionRadius;
+                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(damage * damageMultiplier), 1);
+            }
+        }
     }
 
     void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
