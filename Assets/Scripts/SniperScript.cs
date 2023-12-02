@@ -16,8 +16,8 @@ public class SniperScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curDelay = fireDelay;
-        curSnipeDelay = snipeDelay;
+        curDelay = fireDelay/2;
+        curSnipeDelay = snipeDelay/2;
     }
 
     // Update is called once per frame

@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 6856836988086428768}
   - component: {fileID: 6856836988086428769}
   - component: {fileID: 6856836988086428775}
+  - component: {fileID: 9126516744940548320}
   m_Layer: 0
   m_Name: Wave
   m_TagString: Tower
@@ -281,3 +282,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &9126516744940548320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856836988086428771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ecdb93acbe7849aabdfde5331330afb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 75
+  fireDelay: 50
+  range: 3
+  explosionRadius: 2
+  AoEGraphic: {fileID: 1131566778403441660, guid: f223a77016b2141a6b5af24a6c99360f, type: 3}
+  waveDelay: 30
+  waveLifespan: 1.5
+  waveProjectile: {fileID: 5378143152539299713, guid: c760aefdb844f46fea5a1788a46df5fa, type: 3}

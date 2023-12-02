@@ -14,7 +14,7 @@ public class AoEScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curDelay = fireDelay;
+        curDelay = fireDelay/2;
     }
 
     // Update is called once per frame

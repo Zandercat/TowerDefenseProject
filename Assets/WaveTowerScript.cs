@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BurnScript : MonoBehaviour
+public class WaveTowerScript : MonoBehaviour
 {
     public int damage; //damage per shot
     public int fireDelay; //fixedUpdate frames before next shot
     public float range;
-    public int slowDuration;
-    public float slowIntensity;
+    public float explosionRadius;
+    public GameObject AoEGraphic;
+    public int waveDelay;
+    public float waveLifespan;
+    public GameObject waveProjectile;
     int curDelay;
+    int curWaveDelay;
 
     // Start is called before the first frame update
     void Start()
     {
-        curDelay = fireDelay;
+        curDelay = fireDelay/2;
+        curWaveDelay = waveDelay/2;
     }
 
     // Update is called once per frame
@@ -32,6 +37,14 @@ public class BurnScript : MonoBehaviour
         {
             curDelay++;
         }
+
+        if (curWaveDelay == waveDelay)
+        {
+            emitWave();
+        } else
+        {
+            curWaveDelay++;
+        }
     }
 
     void Aim()
@@ -40,8 +53,6 @@ public class BurnScript : MonoBehaviour
         int numObjects = Physics2D.OverlapCircle(transform.position, range, new ContactFilter2D().NoFilter(), results);
         Debug.Log("Found " + numObjects + " objects in range.");
         List<enemyMovement> enemies = new List<enemyMovement>();
-        List<enemyMovement> slowEnemies = new List<enemyMovement>();
-
         int greatestIndex = 0;
         foreach (Collider2D result in results)
         {
@@ -50,22 +61,23 @@ public class BurnScript : MonoBehaviour
                 enemyMovement enemy = result.gameObject.GetComponent<enemyMovement>();
                 if (enemy != null)
                 {
-                    if (enemy.slowDuration > 0)
+                    int curIndex = enemy.getPathIndex();
+                    Debug.Log("Enemy sighted: " + enemy.name + " at path index " + curIndex);
+                    if (curIndex > greatestIndex)
                     {
-                        slowEnemies.Add(enemy);
+                        Debug.Log("New highest path index found: " + curIndex +
+                            ". Clearing " + enemies.Count + " enemies with index " + greatestIndex + ".");
+                        enemies = new List<enemyMovement>();
+                        enemies.Add(enemy);
+                        greatestIndex = curIndex;
                     }
-                    else
+                    else if (curIndex == greatestIndex)
                     {
                         enemies.Add(enemy);
                     }
+                    //if it's lesser, it's not the target, don't bother with it, do nothing
                 }
             }
-        }
-
-        if (enemies.Count == 0)
-        {
-            enemies = slowEnemies; //only target a slow enemy if all enemies are slowed
-            Debug.Log("No fast enemies. Targeting slow enemies.");
         }
 
         if (enemies.Count == 0)
@@ -74,36 +86,8 @@ public class BurnScript : MonoBehaviour
             return; //Nothing to fire at
         }
 
-        /*          */
-
-
         //Going ahead with firing, set delay
         curDelay = 0;
-        Debug.Log(enemies.Count + " enemies of slowest available speed in range.");
-
-        List<enemyMovement> frontEnemies = new List<enemyMovement>();
-        greatestIndex = 0;
-        foreach (enemyMovement enemy in enemies)
-        {
-            int curIndex = enemy.getPathIndex();
-            Debug.Log("Enemy sighted: " + enemy.name + " at path index " + curIndex);
-            if (curIndex > greatestIndex)
-            {
-                Debug.Log("New highest path index found: " + curIndex +
-                    ". Clearing " + frontEnemies.Count + " enemies with index " + greatestIndex + ".");
-                frontEnemies = new List<enemyMovement>();
-                frontEnemies.Add(enemy);
-                greatestIndex = curIndex;
-            }
-            else if (curIndex == greatestIndex)
-            {
-                frontEnemies.Add(enemy);
-            }
-            //if it's lesser, it's not the target, don't bother with it, do nothing
-        }
-
-        enemies = frontEnemies; //just sub that in so the later code doesn't need changing
-
         Debug.Log(enemies.Count + " enemies with highest path index (" + greatestIndex + " in range.");
 
         float leastDistance = Mathf.Infinity;
@@ -129,14 +113,27 @@ public class BurnScript : MonoBehaviour
     {
         Debug.Log("Firing at " + target.gameObject.name);
 
-        DrawLine(transform.position, target.transform.position, Color.blue);
+        DrawLine(transform.position, target.transform.position, new Color(1, 0.6f, 0.2f)); //random orange, probably not a good orange
 
-        target.gameObject.GetComponent<Health>().TakeDamage(damage, 0);
-        //hardcoded damage type since every tower type needs its own fire function anyways
+        GameObject graphic = Instantiate(AoEGraphic, target.transform.position, Quaternion.identity);
+        graphic.transform.localScale *= explosionRadius;
+        Destroy(graphic, 0.2f);
 
-        target.Slow(slowDuration, slowIntensity);
+        Collider2D[] hits = new Collider2D[100];
+        Physics2D.OverlapCircle(target.transform.position, explosionRadius, new ContactFilter2D().NoFilter(), hits);
 
-        target.isBurned = true;
+        foreach (Collider2D hit in hits)
+        {
+            if (hit != null)
+            {
+                enemyMovement enemy = hit.GetComponent<enemyMovement>();
+                if (enemy != null)
+                {
+                    float damageMultiplier = (explosionRadius - Vector3.Distance(enemy.transform.position, target.transform.position)) / explosionRadius;
+                    enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(damage * damageMultiplier), 1);
+                }
+            }
+        }
     }
 
     void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
@@ -153,5 +150,24 @@ public class BurnScript : MonoBehaviour
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
         GameObject.Destroy(myLine, duration);
+    }
+
+    void emitWave()
+    {
+        int horiz = 0;
+        int vert = 0;
+        while (horiz == 0 && vert == 0)
+        {
+            horiz = Random.Range(-1, 2);
+            vert = Random.Range(-1, 2);
+        }
+        Vector3 WaveHeading = new Vector3(horiz, vert);
+
+        GameObject projectile = Instantiate(waveProjectile, transform.position, Quaternion.identity);
+        projectile.transform.right = WaveHeading;
+
+        Destroy(projectile, waveLifespan);
+
+        curWaveDelay = 0;
     }
 }
