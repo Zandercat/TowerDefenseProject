@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 6856836988086428768}
   - component: {fileID: 6856836988086428769}
   - component: {fileID: 6856836988086428775}
+  - component: {fileID: -5522682947856385710}
   m_Layer: 0
   m_Name: Burn
   m_TagString: Tower
@@ -281,3 +282,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-5522682947856385710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856836988086428771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1122a2158a7b40568062b083de1ddbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
+  fireDelay: 35
+  range: 3
+  slowDuration: 50
+  slowIntensity: 0.4

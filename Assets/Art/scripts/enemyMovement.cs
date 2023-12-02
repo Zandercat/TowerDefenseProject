@@ -15,7 +15,7 @@ public class enemyMovement : MonoBehaviour
 
     public int slowDuration { get; set; }
     private float slowIntensity;
-    private bool isBurned;
+    public bool isBurned { get; set; }
 
     private void Start()
     {
@@ -49,7 +49,7 @@ public class enemyMovement : MonoBehaviour
         {
             slowDuration--;
             direction *= slowIntensity;
-            if (isBurned) {
+            if (isBurned && slowDuration % 2 == 0) {
                 GetComponent<Health>().TakeDamage(1, 2);
             }
         }
