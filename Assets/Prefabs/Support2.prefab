@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 40
   fireDelay: 25
-  range: 3.5
+  range: 3
   slowDuration: 45
   slowIntensity: 0.4
 --- !u!1 &7596517554836491689

@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AoEScript : MonoBehaviour
+public class SniperScript : MonoBehaviour
 {
     public int damage; //damage per shot
     public int fireDelay; //fixedUpdate frames before next shot
     public float range;
-    public float explosionRadius;
-    public GameObject AoEGraphic;
+    public int snipeDamage;
+    public int snipeDelay;
+    public float snipeRange;
     int curDelay;
+    int curSnipeDelay;
 
     // Start is called before the first frame update
     void Start()
     {
         curDelay = fireDelay;
+        curSnipeDelay = snipeDelay;
     }
 
     // Update is called once per frame
@@ -31,6 +34,14 @@ public class AoEScript : MonoBehaviour
         } else
         {
             curDelay++;
+        }
+
+        if (curSnipeDelay == snipeDelay)
+        {
+            Snipe();
+        } else
+        {
+            snipeDelay++;
         }
     }
 
@@ -100,27 +111,10 @@ public class AoEScript : MonoBehaviour
     {
         Debug.Log("Firing at " + target.gameObject.name);
 
-        DrawLine(transform.position, target.transform.position, new Color(1, 0.6f, 0.2f)); //random orange, probably not a good orange
+        DrawLine(transform.position, target.transform.position, Color.red);
 
-        GameObject graphic = Instantiate(AoEGraphic, target.transform.position, Quaternion.identity);
-        graphic.transform.localScale *= explosionRadius;
-        Destroy(graphic, 0.2f);
-
-        Collider2D[] hits = new Collider2D[100];
-        Physics2D.OverlapCircle(target.transform.position, explosionRadius, new ContactFilter2D().NoFilter(), hits);
-
-        foreach (Collider2D hit in hits)
-        {
-            if (hit != null)
-            {
-                enemyMovement enemy = hit.GetComponent<enemyMovement>();
-                if (enemy != null)
-                {
-                    float damageMultiplier = (explosionRadius - Vector3.Distance(enemy.transform.position, target.transform.position)) / explosionRadius;
-                    enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(damage * damageMultiplier), 1);
-                }
-            }
-        }
+        target.gameObject.GetComponent<Health>().TakeDamage(damage, 0);
+        //hardcoded damage type since every tower type needs its own fire function anyways
     }
 
     void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
@@ -137,5 +131,90 @@ public class AoEScript : MonoBehaviour
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
         GameObject.Destroy(myLine, duration);
+    }
+
+    void Snipe()
+    {
+        Collider2D[] results = new Collider2D[100];
+        int numObjects = Physics2D.OverlapCircle(transform.position, snipeRange, new ContactFilter2D().NoFilter(), results);
+        Debug.Log("Found " + numObjects + " objects in range.");
+
+        //filter by greatest remaining HP
+        List<enemyMovement> enemies = new List<enemyMovement>();
+        int greatestHP = 0;
+        foreach (Collider2D result in results)
+        {
+            if (result != null)
+            {
+                enemyMovement enemy = result.gameObject.GetComponent<enemyMovement>();
+                if (enemy != null)
+                {
+                    int curHP = enemy.GetComponent<Health>().hitPoints;
+                    if (curHP > greatestHP)
+                    {
+                        enemies = new List<enemyMovement>();
+                        enemies.Add(enemy);
+                        greatestHP = curHP;
+                    }
+                    else if (greatestHP == curHP)
+                    {
+                        enemies.Add(enemy);
+                    }
+                }
+
+            }
+        }
+
+        if (enemies.Count == 0)
+        {
+            return; //Nothing to fire at
+        }
+        snipeDelay = 0;
+
+        //then filter by closest to exit
+        List<enemyMovement> closestEnemies = new List<enemyMovement>();
+        int greatestIndex = 0;
+        foreach (enemyMovement enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                int curIndex = enemy.getPathIndex();
+                if (curIndex > greatestIndex)
+                {
+                    enemies = new List<enemyMovement>();
+                    closestEnemies.Add(enemy);
+                    greatestIndex = curIndex;
+                }
+                else if (greatestIndex == curIndex)
+                {
+                    closestEnemies.Add(enemy);
+                }
+            }
+        }
+
+        enemies = closestEnemies;
+
+        float leastDistance = Mathf.Infinity;
+        enemyMovement target = null;
+        foreach (enemyMovement enemy in enemies)
+        {
+            float curDistance = Vector3.Distance(enemy.transform.position, enemy.getTarget().position);
+            if (curDistance < leastDistance)
+            {
+                leastDistance = curDistance;
+                target = enemy;
+            }
+            else if (curDistance == leastDistance)
+            {
+                //TODO: Break ties based on least health once health exists.
+            }
+        }
+
+        Debug.Log("Sniping " + target.gameObject.name);
+
+        DrawLine(transform.position, target.transform.position, Color.white);
+
+        target.gameObject.GetComponent<Health>().TakeDamage(snipeDamage, 0);
+        //hardcoded damage type since every tower type needs its own fire function anyways
     }
 }

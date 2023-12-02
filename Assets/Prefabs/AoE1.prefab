@@ -372,6 +372,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   fireDelay: 50
-  range: 3
+  range: 2.5
   explosionRadius: 1.5
   AoEGraphic: {fileID: 1131566778403441660, guid: f223a77016b2141a6b5af24a6c99360f, type: 3}

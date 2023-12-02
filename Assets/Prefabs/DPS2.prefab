@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 60
   fireDelay: 20
-  range: 3.5
+  range: 3
 --- !u!1 &7724240432364373294
 GameObject:
   m_ObjectHideFlags: 0
