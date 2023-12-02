@@ -151,4 +151,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6503b7117a83145aa9f8b8037782df03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 1
+  hitPoints: 50
+  damageResistances: 000000000000000000000000

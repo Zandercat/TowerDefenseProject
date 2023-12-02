@@ -50,8 +50,11 @@ public class DPSScript : MonoBehaviour
                     Debug.Log("Enemy sighted: " + enemy.name + " at path index " + curIndex);
                     if (curIndex > greatestIndex)
                     {
+                        Debug.Log("New highest path index found: " + curIndex +
+                            ". Clearing " + enemies.Count + " enemies with index " + greatestIndex + ".");
                         enemies = new List<enemyMovement>();
                         enemies.Add(enemy);
+                        greatestIndex = curIndex;
                     }
                     else if (curIndex == greatestIndex)
                     {
@@ -70,7 +73,7 @@ public class DPSScript : MonoBehaviour
 
         //Going ahead with firing, set delay
         curDelay = 0;
-        Debug.Log(enemies.Count + " enemies in range.");
+        Debug.Log(enemies.Count + " enemies with highest path index (" + greatestIndex + " in range.");
 
         float leastDistance = Mathf.Infinity;
         enemyMovement target = null;
@@ -94,7 +97,7 @@ public class DPSScript : MonoBehaviour
     void Fire(enemyMovement target)
     {
         Debug.Log("Firing at " + target.gameObject.name);
-        target.gameObject.GetComponent<HealthScript>().takeDamage(damage, 0);
+        target.gameObject.GetComponent<Health>().TakeDamage(damage, 0);
         //hardcoded damage type since every tower type needs its own fire function anyways
     }
 }
