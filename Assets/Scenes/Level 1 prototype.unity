@@ -5322,6 +5322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfcd93b577ad4426eb4a71dc6a8a36a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 0
   startPoint: {fileID: 82687091}
   path:
   - {fileID: 82687091}
