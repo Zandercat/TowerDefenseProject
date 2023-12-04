@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5319580381920846246}
   - component: {fileID: 2005998720271766708}
   m_Layer: 0
-  m_Name: BuildMenuLeft
+  m_Name: BuildMenuBarrage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 6856836988086428771, guid: 8e2aafa79bb3b4bdfbbbede9f4d760c1, type: 3}
+  upgradePrice: 220
 --- !u!1 &6113731901638007891
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ GameObject:
   - component: {fileID: 2571677111177357115}
   - component: {fileID: 9107424208103732151}
   m_Layer: 0
-  m_Name: BuildMenuRight
+  m_Name: BuildMenuSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 6856836988086428771, guid: 6dd4763ae7622496882538dfd23b35be, type: 3}
+  upgradePrice: 200
 --- !u!1 &8254212040404310383
 GameObject:
   m_ObjectHideFlags: 0

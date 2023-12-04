@@ -6,6 +6,8 @@ public class Levelmanager : MonoBehaviour {
 
     public static Levelmanager main;
 
+    public int lives;
+
     public Transform startPoint;
     public Transform[] path;
 
@@ -14,4 +16,12 @@ public class Levelmanager : MonoBehaviour {
         main = this;
     }
 
+    public void loseLife()
+    {
+        lives--;
+        if (lives == 0)
+        {
+            //lose the game
+        }
+    }
 }

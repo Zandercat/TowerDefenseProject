@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildMenuScript : MonoBehaviour
 {
     public GameObject upgrade;
+    public int upgradePrice;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,8 @@ public class BuildMenuScript : MonoBehaviour
 
     public void OnClick()
     {
-        //TODO: Check if you have enough money.
+        bool canAffordUpgrade = GameObject.Find("Canvas").GetComponent<UIScript>().spendMoney(upgradePrice);
+        if (!canAffordUpgrade) return;
 
         //spawn the upgraded self and destroy the current self
         GameObject parent = transform.parent.parent.gameObject;

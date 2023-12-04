@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 6856836988086428771, guid: 21065c444141c4d80ab77e98a2276451, type: 3}
+  upgradePrice: 90
 --- !u!1 &6856836988086428771
 GameObject:
   m_ObjectHideFlags: 0

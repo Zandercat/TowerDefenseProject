@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1395156662007810073}
   - component: {fileID: 3961211009229187749}
   m_Layer: 0
-  m_Name: BuildMenuRight
+  m_Name: BuildMenuBurn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2749120117505205748}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4755090990804224572
 SpriteRenderer:
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 6856836988086428771, guid: 6a433086afef94d1cb112345afabbacc, type: 3}
+  upgradePrice: 250
 --- !u!1 &6113731901638007891
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,8 +372,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6590454404939553090}
   - {fileID: 4298031114173929621}
+  - {fileID: 6590454404939553090}
   m_Father: {fileID: 6856836988086428768}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -389,7 +390,7 @@ GameObject:
   - component: {fileID: 6745033260112519291}
   - component: {fileID: 602539815805375906}
   m_Layer: 0
-  m_Name: BuildMenuLeft
+  m_Name: BuildMenuBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,7 +409,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2749120117505205748}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8427079186709000565
 SpriteRenderer:
@@ -491,3 +492,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 6856836988086428771, guid: c4d208633d07c42c0ab6c9f8547a0bc8, type: 3}
+  upgradePrice: 190
