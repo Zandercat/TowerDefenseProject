@@ -155,6 +155,7 @@ MonoBehaviour:
   hitPoints: 50
   MaxHitPoints: 0
   damageResistances: 000000000000000000000000
+  moneyDropped: 15
   healthBar: {fileID: 4546055386347135710}
 --- !u!1001 &7641013262491837045
 PrefabInstance:
