@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Levelmanager : MonoBehaviour {
 
@@ -27,7 +28,7 @@ public class Levelmanager : MonoBehaviour {
 
         if (lives == 0)
         {
-            //lose the game
+            SceneManager.LoadScene("LoseScene");
         }
     }
 }
