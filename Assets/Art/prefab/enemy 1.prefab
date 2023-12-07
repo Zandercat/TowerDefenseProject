@@ -163,6 +163,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4962691522289310240}
     m_Modifications:
+    - target: {fileID: 4508166888900849081, guid: cefc9ac05dceb9d419115f05e888cfc1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6647457608051142626, guid: cefc9ac05dceb9d419115f05e888cfc1, type: 3}
       propertyPath: m_Name
       value: EnemyHealthBarCanvas
