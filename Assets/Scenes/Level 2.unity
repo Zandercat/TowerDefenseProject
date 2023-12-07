@@ -3058,7 +3058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfcd93b577ad4426eb4a71dc6a8a36a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lives: 0
+  lives: 10
   startPoint: {fileID: 82687091}
   path:
   - {fileID: 82687091}
@@ -3084,6 +3084,7 @@ MonoBehaviour:
   - {fileID: 1549954988}
   - {fileID: 1502453622}
   - {fileID: 8815279}
+  healthBar: {fileID: 8407173431502768245}
 --- !u!4 &992376518
 Transform:
   m_ObjectHideFlags: 0
@@ -6769,6 +6770,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6996991145484957110, guid: de1012a280d08c640bd1cf0682cd6ce4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996991145484957110, guid: de1012a280d08c640bd1cf0682cd6ce4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8407173431265164246, guid: de1012a280d08c640bd1cf0682cd6ce4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -6859,3 +6868,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1012a280d08c640bd1cf0682cd6ce4, type: 3}
+--- !u!114 &8407173431502768245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5534658236428957259, guid: de1012a280d08c640bd1cf0682cd6ce4, type: 3}
+  m_PrefabInstance: {fileID: 8407173431502768244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49e7be4c3426454bbdc1841a0e6e61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
