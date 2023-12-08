@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6856836988086428768}
   - component: {fileID: 6856836988086428769}
   - component: {fileID: 6856836988086428775}
+  - component: {fileID: -1167766478093447917}
   m_Layer: 0
   m_Name: Blast
   m_TagString: Tower
@@ -196,3 +197,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-1167766478093447917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856836988086428771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b41d0ae5cc4707afa8ae5e69a7f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 90
+  fireDelay: 60
+  range: 3
+  explosionRadius: 2.25
+  AoEGraphic: {fileID: 1131566778403441660, guid: f223a77016b2141a6b5af24a6c99360f, type: 3}
+  blastDelay: 240
+  lingeringBlast: {fileID: 5362007194843032873, guid: 0e44cf7cd1ba24c1e8ac3e168d3524c1, type: 3}
+  blastLifespan: 3
