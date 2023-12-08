@@ -209,8 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ecdb93acbe7849aabdfde5331330afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 70
-  fireDelay: 50
+  damage: 60
+  fireDelay: 55
   range: 3
   explosionRadius: 2
   AoEGraphic: {fileID: 1131566778403441660, guid: f223a77016b2141a6b5af24a6c99360f, type: 3}

@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d11e3b076304321bc23d790aff6831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 60
+  damage: 40
   fireDelay: 20
   range: 3
 --- !u!1 &7724240432364373294
