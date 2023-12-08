@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6856836988086428768}
   - component: {fileID: 6856836988086428769}
   - component: {fileID: 6856836988086428775}
+  - component: {fileID: -387064747744375822}
   m_Layer: 0
   m_Name: Block
   m_TagString: Tower
@@ -196,3 +197,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-387064747744375822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856836988086428771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e493f11c05eb94e6092b620e392b1ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  fireDelay: 35
+  range: 3
+  slowDuration: 50
+  slowIntensity: 0.4
+  blockDelay: 200
+  blockSprite: {fileID: 5362007194843032873, guid: f3736033255af42f4a2d6851948a1032, type: 3}

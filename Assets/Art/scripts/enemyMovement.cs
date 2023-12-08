@@ -16,11 +16,13 @@ public class enemyMovement : MonoBehaviour
     public int slowDuration { get; set; }
     private float slowIntensity;
     public bool isBurned { get; set; }
+    private int blockDuration;
 
     private void Start()
     {
         target = Levelmanager.main.path[pathIndex];
         slowDuration = 0;
+        blockDuration = 0;
     }
 
     private void Update()
@@ -59,7 +61,14 @@ public class enemyMovement : MonoBehaviour
             isBurned = false;
         }
 
-        rb.velocity = direction * moveSpeed;
+        if (blockDuration > 0)
+        {
+            rb.velocity = Vector3.zero;
+            blockDuration--;
+        } else
+        {
+            rb.velocity = direction * moveSpeed;
+        }
     }
 
     public int getPathIndex()
@@ -76,5 +85,10 @@ public class enemyMovement : MonoBehaviour
     {
         if (slowDur > slowDuration) slowDuration = slowDur;
         if (slowIntens > slowIntensity) slowIntensity = slowIntens;
+    }
+
+    public void Block()
+    {
+        blockDuration = 30;
     }
 }
