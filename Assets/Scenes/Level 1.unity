@@ -3369,6 +3369,7 @@ Transform:
   - {fileID: 75107425}
   - {fileID: 1664868631}
   - {fileID: 1996388434}
+  - {fileID: 647520212}
   - {fileID: 1483165616}
   - {fileID: 674601421}
   - {fileID: 1979489000}
@@ -3384,18 +3385,17 @@ Transform:
   - {fileID: 434369450}
   - {fileID: 848851115}
   - {fileID: 492542460}
-  - {fileID: 647520212}
-  - {fileID: 2145701701}
-  - {fileID: 213089238}
-  - {fileID: 590538204}
   - {fileID: 854914129}
+  - {fileID: 2145701701}
+  - {fileID: 1061153700}
+  - {fileID: 213089238}
+  - {fileID: 1877051855}
+  - {fileID: 590538204}
+  - {fileID: 682328877}
   - {fileID: 378351059}
   - {fileID: 1849222228}
   - {fileID: 1263941105}
   - {fileID: 587030134}
-  - {fileID: 1877051855}
-  - {fileID: 682328877}
-  - {fileID: 1061153700}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4738,6 +4738,7 @@ MonoBehaviour:
   enemiesPerSecond: 1.2
   timeBetweenWaves: 8
   diffcultyFactor: 0.6
+  wavesInLevel: 3
 --- !u!114 &992376520
 MonoBehaviour:
   m_ObjectHideFlags: 0

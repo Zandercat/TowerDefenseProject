@@ -3443,7 +3443,7 @@ MonoBehaviour:
   enemiesPerSecond: 0.9
   timeBetweenWaves: 8
   diffcultyFactor: 0.6
-  wavesInLevel: 1
+  wavesInLevel: 3
 --- !u!114 &992376520
 MonoBehaviour:
   m_ObjectHideFlags: 0
