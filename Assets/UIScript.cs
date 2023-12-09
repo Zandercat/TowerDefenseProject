@@ -7,11 +7,12 @@ public class UIScript : MonoBehaviour
 {
     public int gold; //public for starting gold purposes
     public TMP_Text goldText;
+    public TMP_Text waveNumber;
+    public TMP_Text waveCountdown;
 
     // Start is called before the first frame update
     void Start()
     {
-        goldText = transform.Find("Gold").Find("Gold Amount").GetComponent<TMP_Text>();
         goldText.text = gold.ToString();
     }
 
@@ -36,5 +37,15 @@ public class UIScript : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void setWaveNumber(int number)
+    {
+        waveNumber.text = number.ToString();
+    }
+
+    public void setWaveCountdown(int number)
+    {
+        waveCountdown.text = number.ToString();
     }
 }

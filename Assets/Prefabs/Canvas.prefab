@@ -710,7 +710,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 500
-  goldText: {fileID: 0}
+  goldText: {fileID: 8407173431776282718}
+  waveNumber: {fileID: 8407173430404914689}
+  waveCountdown: {fileID: 8407173430437031313}
 --- !u!1 &8407173431493419820
 GameObject:
   m_ObjectHideFlags: 0

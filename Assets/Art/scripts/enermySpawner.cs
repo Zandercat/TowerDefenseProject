@@ -26,19 +26,27 @@ public class enermySpawner : MonoBehaviour
 
     private int waveCountdown;
 
+    private UIScript uiScript;
+
     private void Awake()
     {
         onEnemyDestroy.AddListener(EnemyDestroyed);
     }
     private void Start()
     {
+        uiScript = GameObject.Find("Canvas").GetComponent<UIScript>();
         StartWave();
         waveCountdown = 0;
+        
     }
 
     private void FixedUpdate()
     {
-        if (waveCountdown == 300)
+        if (waveCountdown % 50 == 0)
+        {
+            uiScript.setWaveCountdown(8 - (waveCountdown / 50));
+        }
+        if (waveCountdown == 400)
         {
             waveCountdown = 0;
             StartWave();
@@ -74,6 +82,7 @@ public class enermySpawner : MonoBehaviour
     }
     private void StartWave()
     {
+        uiScript.setWaveNumber(currentWave);
         isSpawning = true;
         enemiesLeftToSpawn = enemiesPerWave();
     }
@@ -84,7 +93,7 @@ public class enermySpawner : MonoBehaviour
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
-        waveCountdown = 0;
+        waveCountdown = -1;
     }
 
     private int enemiesPerWave()
