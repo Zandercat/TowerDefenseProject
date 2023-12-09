@@ -24,6 +24,7 @@ public class enermySpawner : MonoBehaviour
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
 
+    private int waveCountdown;
 
     private void Awake()
     {
@@ -32,12 +33,19 @@ public class enermySpawner : MonoBehaviour
     private void Start()
     {
         StartWave();
+        waveCountdown = 0;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        if (waveCountdown == 300)
+        {
+            waveCountdown = 0;
+            StartWave();
+        }
         if (!isSpawning)
         {
+            waveCountdown++;
             return;
         }
         timeSinceLastSpawn += Time.deltaTime;
@@ -72,10 +80,11 @@ public class enermySpawner : MonoBehaviour
 
     private void EndWave()
     {
+        enemiesPerSecond += 0.25f;
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
-        Start();
+        waveCountdown = 0;
     }
 
     private int enemiesPerWave()
