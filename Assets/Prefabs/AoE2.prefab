@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585dfd0f87b9a4a289eec8de172d2fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 22
   fireDelay: 65
   range: 3
   explosionRadius: 2
