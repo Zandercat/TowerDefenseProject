@@ -47,6 +47,7 @@ public class enermySpawner : MonoBehaviour
     {
         if (onLastWave)
         {
+            if (enemiesAlive <= 0) NextLevel();
             return;
         }
         if (waveCountdown % 50 == 0)
