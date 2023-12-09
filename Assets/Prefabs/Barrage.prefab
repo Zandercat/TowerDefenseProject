@@ -209,6 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6433a0e3c504532bd95fa01a65cb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
-  fireDelay: 10
+  damage: 35
+  fireDelay: 20
   range: 3

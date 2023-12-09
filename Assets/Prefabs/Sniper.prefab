@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 55
-  fireDelay: 130
+  fireDelay: 90
   range: 3.5
   snipeDamage: 250
   snipeDelay: 600
