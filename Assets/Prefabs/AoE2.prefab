@@ -808,6 +808,9 @@ MonoBehaviour:
   range: 3
   explosionRadius: 2
   AoEGraphic: {fileID: 1131566778403441660, guid: f223a77016b2141a6b5af24a6c99360f, type: 3}
+  targetEnemyType:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7817144538895008797
 GameObject:
   m_ObjectHideFlags: 0

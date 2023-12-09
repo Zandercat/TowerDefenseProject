@@ -10,6 +10,7 @@ public class AoEScript : MonoBehaviour
     public float explosionRadius;
     public GameObject AoEGraphic;
     int curDelay;
+    public LayerMask targetEnemyType;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,10 @@ public class AoEScript : MonoBehaviour
     void Aim()
     {
         Collider2D[] results = new Collider2D[100];
-        int numObjects = Physics2D.OverlapCircle(transform.position, range, new ContactFilter2D().NoFilter(), results);
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.useLayerMask = true;
+        contactFilter.SetLayerMask(targetEnemyType);
+        int numObjects = Physics2D.OverlapCircle(transform.position, range, contactFilter, results);
         Debug.Log("Found " + numObjects + " objects in range.");
         List<enemyMovement> enemies = new List<enemyMovement>();
         int greatestIndex = 0;

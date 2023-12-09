@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5654040116881469225}
   - component: {fileID: 5654040116881469226}
   - component: {fileID: 3717247884699364170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: fast low health 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
