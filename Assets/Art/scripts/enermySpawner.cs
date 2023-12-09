@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enermySpawner : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class enermySpawner : MonoBehaviour
     [SerializeField] private float enemiesPerSecond = 0.5f;
     [SerializeField] private float timeBetweenWaves = 8f;
     [SerializeField] private float diffcultyFactor = 0.6f;
+    public int wavesInLevel = 1;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy= new UnityEvent();
@@ -25,6 +27,7 @@ public class enermySpawner : MonoBehaviour
     private bool isSpawning = false;
 
     private int waveCountdown;
+    private bool onLastWave = false;
 
     private UIScript uiScript;
 
@@ -42,6 +45,10 @@ public class enermySpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (onLastWave)
+        {
+            return;
+        }
         if (waveCountdown % 50 == 0)
         {
             uiScript.setWaveCountdown(8 - (waveCountdown / 50));
@@ -73,6 +80,7 @@ public class enermySpawner : MonoBehaviour
     private void EnemyDestroyed()
     {
         enemiesAlive--;
+        if (onLastWave && enemiesAlive <= 0) NextLevel();
     }
     private void SpawnEnemy()
     {
@@ -94,10 +102,26 @@ public class enermySpawner : MonoBehaviour
         timeSinceLastSpawn = 0f;
         currentWave++;
         waveCountdown = -1;
+
+        if (currentWave > wavesInLevel) onLastWave = true;
     }
 
     private int enemiesPerWave()
     {
         return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, diffcultyFactor));
+    }
+
+    public void NextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentSceneIndex + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(currentSceneIndex + 1);
+        }
+        else
+        {
+            Debug.Log("No next scene.");
+        }
     }
 }
